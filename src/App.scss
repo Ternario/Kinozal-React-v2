@@ -1,0 +1,5 @@
+@import "./Variables.scss";
+
+.App {
+    background-color: lighten($color: $color-dark, $amount: 81%);
+}
