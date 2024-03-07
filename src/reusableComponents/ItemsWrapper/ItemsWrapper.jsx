@@ -2,16 +2,14 @@ import SideBarFilter from "./SideBarFilter/SideBarFilter";
 import Items from "../Items/Items";
 import "./ItemsWrapper.scss";
 
-const ItemsWrapper = ({ getData, getList, title }) => {
+const ItemsWrapper = ({ filterList, getData, getList, title }) => {
     return (
         <div className="itemsWrapper">
-            <div className="itemsWrapper-sidebar">
-                <SideBarFilter getList={getList} />
-            </div>
+            <SideBarFilter filterList={filterList} getList={getList} />
 
             <div className="itemsWrapper-content">
-                <h2 className="label">{title}</h2>
-                <div className="itemsWrapper-items">
+                <h2 className="itemsWrapper-content__label">{title}</h2>
+                <div className="itemsWrapper-content__items">
                     <Items getData={getData} title={title} />
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const SideBarFilter = ({ getList }) => {
+const SideBarFilter = ({ filterList, getList }) => {
     const [state, setState] = useState(null);
 
     useEffect(() => {
@@ -11,14 +11,21 @@ const SideBarFilter = ({ getList }) => {
         });
     }, [getList]);
 
-    console.log(state);
-
-    const renderItems = (arr) => {
+    const renderGenresItems = (arr) => {
         return arr.state.map(({ id, genre }) => {
-            console.log(genre);
             return (
-                <div key={id} className="sideBarFilter-genres__genre">
+                <div key={id} className="wrapper-content">
                     {genre}
+                </div>
+            );
+        });
+    };
+
+    const renderFilterItems = (arr) => {
+        return arr.map(({ id, title }) => {
+            return (
+                <div key={id} className="wrapper-content">
+                    {title}
                 </div>
             );
         });
@@ -28,16 +35,20 @@ const SideBarFilter = ({ getList }) => {
         return <div>loading...</div>;
     }
 
-    const items = renderItems(state);
+    const listItems = renderFilterItems(filterList);
+    const genresItems = renderGenresItems(state);
 
     return (
-        <div className="sideBarFilter">
-            <div className="sideBarFilter-rating">
-                <div>8-10</div>
-                <div>6-8</div>
+        <div className="itemsWrapper-sidebar">
+            <div className="itemsWrapper-sidebar__filter">
+                <h3 className="label">Filter</h3>
+                <div className="wrapper">{listItems}</div>
             </div>
 
-            <div className="sideBarFilter-genres">{items}</div>
+            <div className="itemsWrapper-sidebar__genres">
+                <h3 className="label">Genres</h3>
+                <div className="wrapper">{genresItems}</div>
+            </div>
         </div>
     );
 };

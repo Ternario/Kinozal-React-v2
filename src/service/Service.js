@@ -14,6 +14,15 @@ export default class MoviesData {
         return await res.json();
     }
 
+    getMovies = async () => {
+        const URL =
+            "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
     getUpcomingMovies = async () => {
         const URL = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
 
@@ -30,9 +39,17 @@ export default class MoviesData {
         return res.results.map(this._transformItem);
     };
 
-    getMovies = async () => {
+    getNowPlayingMovies = async () => {
         const URL =
-            "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+            "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
+    getPopularMovies = async () => {
+        const URL = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
 
         const res = await this.getResource(URL);
 
@@ -42,6 +59,38 @@ export default class MoviesData {
     getSerials = async () => {
         const URL =
             "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc";
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
+    getAiringTodaySerials = async () => {
+        const URL = "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1";
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
+    getOnTheAirSerials = async () => {
+        const URL = "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1";
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
+    getPopularSerials = async () => {
+        const URL = "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1";
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
+    getTopRatedSerials = async () => {
+        const URL = "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1";
 
         const res = await this.getResource(URL);
 
@@ -64,23 +113,23 @@ export default class MoviesData {
         return res.genres.map(this._transformItemList);
     };
 
-    getItemByName = async (name) => {
-        const res = await this.getResource();
-        const item = res.filter((item) => {
-            return item.title.toLowerCase().indexOf(name.toLowerCase()) > -1;
-        });
+    // getItemByName = async (name) => {
+    //     const res = await this.getResource();
+    //     const item = res.filter((item) => {
+    //         return item.title.toLowerCase().indexOf(name.toLowerCase()) > -1;
+    //     });
 
-        return item.map(this._transformItem);
-    };
+    //     return item.map(this._transformItem);
+    // };
 
-    getItemById = async (id) => {
-        const res = await this.getResource();
-        const itemId = res.filter((item) => {
-            return item.id === id;
-        });
+    // getItemById = async (id) => {
+    //     const res = await this.getResource();
+    //     const itemId = res.filter((item) => {
+    //         return item.id === id;
+    //     });
 
-        return itemId.map(this._transformItemId);
-    };
+    //     return itemId.map(this._transformItemId);
+    // };
 
     _transformItem(item) {
         return {

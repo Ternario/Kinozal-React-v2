@@ -13,7 +13,7 @@ const CommonPage = ({ getUpcomingMovies, getTopRated }) => {
             <div className="main">
                 <div className="sectionWrapper">
                     <div className="sectionWrapper-label">
-                        <h2 className="label-new">New Movies</h2>
+                        <h2 className="label-new">Upcoming</h2>
                     </div>
                     <div className="sectionWrapper-items">
                         <Items getData={getUpcomingMovies} />
@@ -22,7 +22,7 @@ const CommonPage = ({ getUpcomingMovies, getTopRated }) => {
 
                 <div className="sectionWrapper">
                     <div className="sectionWrapper-label">
-                        <h2 className="label-top">TOP of the week</h2>
+                        <h2 className="label-top">TOP Rated</h2>
                     </div>
                     <div className="sectionWrapper-items">
                         <Items getData={getTopRated} />

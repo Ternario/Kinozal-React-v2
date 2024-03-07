@@ -10,6 +10,20 @@ import MoviesData from "./service/Service";
 function App() {
     const service = new MoviesData();
 
+    const movieFilterList = [
+        { id: "Upcoming", title: "Upcoming" },
+        { id: "NowPlaying", title: "Now Playing" },
+        { id: "Popualr", title: "Popular" },
+        { id: "TopRated", title: "Top Rated" },
+    ];
+
+    const serialsFilterList = [
+        { id: "AiringToday", title: "Airing Today" },
+        { id: "OnTheAir", title: "On The Air" },
+        { id: "Popualr", title: "Popular" },
+        { id: "TopRated", title: "Top Rated" },
+    ];
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -28,6 +42,8 @@ function App() {
                             path="Movies"
                             element={
                                 <ItemsWrapper
+                                    service={service}
+                                    filterList={movieFilterList}
                                     getData={service.getMovies}
                                     getList={service.getMoviesList}
                                     title={"Movies"}
@@ -38,6 +54,7 @@ function App() {
                             path="Serials"
                             element={
                                 <ItemsWrapper
+                                    filterList={serialsFilterList}
                                     getData={service.getSerials}
                                     getList={service.getSerialsList}
                                     title={"Serials"}
