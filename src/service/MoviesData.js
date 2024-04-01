@@ -40,8 +40,7 @@ export default class MoviesData {
     };
 
     getNowPlayingMovies = async () => {
-        const URL =
-            "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+        const URL = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
         const res = await this.getResource(URL);
 
@@ -50,6 +49,14 @@ export default class MoviesData {
 
     getPopularMovies = async () => {
         const URL = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
+    getMoviesByGenres = async (genresId) => {
+        const URL = `https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&with_genres=${genresId}&page=1&sort_by=popularity.desc`;
 
         const res = await this.getResource(URL);
 
@@ -97,6 +104,14 @@ export default class MoviesData {
         return res.results.map(this._transformItem);
     };
 
+    getSerialsByGenres = async (genresId) => {
+        const URL = `https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&with_genres=${genresId}&page=1&sort_by=popularity.desc`;
+
+        const res = await this.getResource(URL);
+
+        return res.results.map(this._transformItem);
+    };
+
     getMoviesList = async () => {
         const URL = "https://api.themoviedb.org/3/genre/movie/list?language=en";
 
@@ -108,6 +123,34 @@ export default class MoviesData {
     getSerialsList = async () => {
         const URL = "https://api.themoviedb.org/3/genre/tv/list?language=en";
 
+        const res = await this.getResource(URL);
+
+        return res.genres.map(this._transformItemList);
+    };
+
+    getCustomSearch = async (query) => {
+        const URL = `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`;
+        const res = await this.getResource(URL);
+
+        return res.genres.map(this._transformItemList);
+    };
+
+    getCustomMoviesSearch = async (query) => {
+        const URL = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+        const res = await this.getResource(URL);
+
+        return res.genres.map(this._transformItemList);
+    };
+
+    getCustomTvSearch = async (query) => {
+        const URL = `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=1`;
+        const res = await this.getResource(URL);
+
+        return res.genres.map(this._transformItemList);
+    };
+
+    getCustomPersonSearch = async (query) => {
+        const URL = `https://api.themoviedb.org/3/search/person?query=${query}&include_adult=false&language=en-US&page=1`;
         const res = await this.getResource(URL);
 
         return res.genres.map(this._transformItemList);

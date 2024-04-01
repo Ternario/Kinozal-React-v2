@@ -1,65 +1,56 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { useState } from "react";
 import "./App.css";
 import "./App.scss";
 import Main from "./components/Main/Main";
 import CommonPage from "./components/CommonPage/CommonPage";
-import ItemsWrapper from "./reusableComponents/ItemsWrapper/ItemsWrapper";
+import MoviesPage from "./components/MoviesPage/MoviesPage";
+import SerialsPage from "./components/SerialsPage/SerialsPage";
 
-import MoviesData from "./service/Service";
+import MoviesData from "./service/MoviesData";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
     const service = new MoviesData();
 
-    const movieFilterList = [
-        { id: "Upcoming", title: "Upcoming" },
-        { id: "NowPlaying", title: "Now Playing" },
-        { id: "Popualr", title: "Popular" },
-        { id: "TopRated", title: "Top Rated" },
-    ];
+    const [state, setState] = useState({
+        query: "",
+        searchQuery: "",
+    });
 
-    const serialsFilterList = [
-        { id: "AiringToday", title: "Airing Today" },
-        { id: "OnTheAir", title: "On The Air" },
-        { id: "Popualr", title: "Popular" },
-        { id: "TopRated", title: "Top Rated" },
-    ];
+    const searchItem = (e) => {
+        setState({
+            query: e.target.value,
+            // searchQuery: state.query,
+        });
+    };
+
+    const showSerchItem = (e) => {
+        e.preventDefault();
+        console.log(state);
+
+        setState({ searchQuery: "123" });
+        console.log(state);
+
+        if (state.searchQuery === "") {
+            return;
+        }
+
+        // setState({ query: "" });
+    };
 
     return (
         <BrowserRouter>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<Main />}>
+                    <Route path="/" element={<Main searchItem={searchItem} showSerchItem={showSerchItem} />}>
+                        <Route index element={<CommonPage service={service} />} />
+                        <Route path="Movies" element={<MoviesPage service={service} />} />
+                        <Route path="Serials" element={<SerialsPage service={service} />} />
                         <Route
-                            index
-                            element={
-                                <CommonPage
-                                    getUpcomingMovies={service.getUpcomingMovies}
-                                    getTopRated={service.getTopRated}
-                                />
-                            }
-                        />
-                        <Route
-                            path="Movies"
-                            element={
-                                <ItemsWrapper
-                                    service={service}
-                                    filterList={movieFilterList}
-                                    getData={service.getMovies}
-                                    getList={service.getMoviesList}
-                                    title={"Movies"}
-                                />
-                            }
-                        />
-                        <Route
-                            path="Serials"
-                            element={
-                                <ItemsWrapper
-                                    filterList={serialsFilterList}
-                                    getData={service.getSerials}
-                                    getList={service.getSerialsList}
-                                    title={"Serials"}
-                                />
-                            }
+                            path="Search"
+                            element={<SearchPage service={service} searchQuery={state.searchQuery} />}
                         />
                     </Route>
                 </Routes>

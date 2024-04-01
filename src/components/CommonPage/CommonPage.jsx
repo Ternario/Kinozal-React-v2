@@ -5,8 +5,14 @@ import DataNews from "../../localData/dataNews.json";
 import News from "../../localData/movieNews.json";
 import RatingMovie from "../../localData/ratingMovie.json";
 import SideBar from "./SideBar/SideBar";
+import { useState } from "react";
 
-const CommonPage = ({ getUpcomingMovies, getTopRated }) => {
+const CommonPage = ({ service }) => {
+    const [state, setState] = useState({
+        upcoming: service.getUpcomingMovies(),
+        topRated: service.getTopRated(),
+    });
+
     return (
         <div className="container">
             <SideBar dataNews={DataNews} ratingMovie={RatingMovie} />
@@ -16,7 +22,7 @@ const CommonPage = ({ getUpcomingMovies, getTopRated }) => {
                         <h2 className="label-new">Upcoming</h2>
                     </div>
                     <div className="sectionWrapper-items">
-                        <Items getData={getUpcomingMovies} />
+                        <Items getData={state.upcoming} />
                     </div>
                 </div>
 
@@ -25,7 +31,7 @@ const CommonPage = ({ getUpcomingMovies, getTopRated }) => {
                         <h2 className="label-top">TOP Rated</h2>
                     </div>
                     <div className="sectionWrapper-items">
-                        <Items getData={getTopRated} />
+                        <Items getData={state.topRated} />
                     </div>
                 </div>
 

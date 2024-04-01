@@ -6,24 +6,21 @@ const Items = ({ getData }) => {
     const [state, setState] = useState(null);
 
     useEffect(() => {
-        getData().then((state) => {
+        getData.then((state) => {
             setState({
                 state,
             });
         });
     }, [getData]);
 
-    const renderItems = (arr) => {
-        return arr.state.map(({ id, poster, title, releaseDate }) => {
+    const renderItems = (stateArray) => {
+        return stateArray.state.map(({ id, poster, title, releaseDate }) => {
             const date = releaseDate.substr(0, 4);
 
             return (
                 <div key={id} className="section">
                     <div className="section-poster">
-                        <img
-                            src={`https://image.tmdb.org/t/p/original/${poster}`}
-                            alt="poster"
-                        />
+                        <img src={`https://image.tmdb.org/t/p/original/${poster}`} alt="poster" />
                     </div>
                     <div className="section-title">
                         <div className="section-title__name">{title}</div>

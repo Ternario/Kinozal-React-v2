@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import search from "../../../../img/icons-search.png";
+import { redirect } from "react-router-dom";
 
 class SearchPanel extends Component {
     state = {
@@ -20,8 +21,6 @@ class SearchPanel extends Component {
         if (name === "") {
             return;
         }
-
-        this.props.history.push(`/search=${name}`);
 
         this.setState({
             name: "",

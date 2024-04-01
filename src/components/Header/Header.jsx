@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "./Header.scss";
+import SearchPanel from "./SearchPanel/SearchPanel";
 
-const Header = () => {
+const Header = ({ searchItem, showSerchItem }) => {
     return (
         <div className="header">
             <div className="header-logo">
@@ -19,7 +20,7 @@ const Header = () => {
                 <div className="header-navbar__menu">
                     <nav className="menu-item">
                         <Link to="/" className="itemMenu">
-                            Main menu
+                            Main Menu
                         </Link>
                         <Link to="Movies" className="itemMenu">
                             Movies
@@ -27,13 +28,16 @@ const Header = () => {
                         <Link to="Serials" className="itemMenu">
                             Serials
                         </Link>
+                        <Link to="Watchlater" className="itemMenu">
+                            Watch Later
+                        </Link>
                     </nav>
                 </div>
+                <SearchPanel searchItem={searchItem} showSerchItem={showSerchItem} />
                 <div className="header-navbar__info">
                     <div className="info-item">
                         <div className="itemInfo">Sign Up</div>
-                        <div className="itemInfo">Contacts</div>
-                        <div className="itemInfo">Rating</div>
+                        <div className="itemInfo">Sign In</div>
                     </div>
                 </div>
             </div>
