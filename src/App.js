@@ -14,44 +14,21 @@ import SearchPage from "./components/SearchPage/SearchPage";
 function App() {
     const service = new MoviesData();
 
-    const [state, setState] = useState({
-        query: "",
-        searchQuery: "",
-    });
+    const [query, setQuery] = useState("");
 
-    const searchItem = (e) => {
-        setState({
-            query: e.target.value,
-            // searchQuery: state.query,
-        });
-    };
-
-    const showSerchItem = (e) => {
-        e.preventDefault();
-        console.log(state);
-
-        setState({ searchQuery: "123" });
-        console.log(state);
-
-        if (state.searchQuery === "") {
-            return;
-        }
-
-        // setState({ query: "" });
+    const showSerchItem = (query) => {
+        setQuery(query);
     };
 
     return (
         <BrowserRouter>
             <div className="App">
                 <Routes>
-                    <Route path="/" element={<Main searchItem={searchItem} showSerchItem={showSerchItem} />}>
+                    <Route path="/" element={<Main showSerchItem={showSerchItem} />}>
                         <Route index element={<CommonPage service={service} />} />
-                        <Route path="Movies" element={<MoviesPage service={service} />} />
-                        <Route path="Serials" element={<SerialsPage service={service} />} />
-                        <Route
-                            path="Search"
-                            element={<SearchPage service={service} searchQuery={state.searchQuery} />}
-                        />
+                        <Route path="movies" element={<MoviesPage service={service} />} />
+                        <Route path="serials" element={<SerialsPage service={service} />} />
+                        <Route path="search/:query" element={<SearchPage service={service} searchQuery={query} />} />
                     </Route>
                 </Routes>
             </div>

@@ -1,0 +1,69 @@
+@import "../../../Variables.scss";
+// @import './../../Mixins-media.scss';
+@import "../../../common.scss";
+
+.section {
+    display: block;
+    text-align: center;
+    // height: 320px;
+    cursor: pointer;
+
+    // @include sm-xs {
+    //     height: 350px;
+    // }
+
+    // @include xs {
+    //     height: 260px;
+    // }
+
+    .section-poster {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        height: 250px;
+        border: 1px solid $color-gray;
+        border-radius: $gap / 2.5;
+        overflow: hidden;
+        transition: 0.4s;
+    }
+
+    .section-poster img {
+        height: 250px;
+        width: 95%;
+        // @include sm-xs {
+        //     height: 310px;
+        // }
+        // @include xs {
+        //     height: 220px;
+        // }
+    }
+
+    .section-title {
+        text-align: center;
+        width: 100%;
+
+        &__name,
+        &__date {
+            padding-top: 5px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: $color-dark;
+
+            // @include xs {
+            //     font-size: 0.8rem;
+            // }
+        }
+    }
+}
+
+.section:hover {
+    .section-poster {
+        background-color: $color-accent;
+    }
+
+    .section-title {
+        &__name,
+        &__date {
+            color: $color-accent;
+        }
+    }
+}

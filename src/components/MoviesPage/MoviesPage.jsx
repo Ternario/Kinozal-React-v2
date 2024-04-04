@@ -1,13 +1,13 @@
 import SideBarFilter from "./SideBarFilter/SideBarFilter";
 import Items from "../../reusableComponents/Items/Items";
-import "./ItemsWrapper.scss";
+import "../../reusableStyleFiles/ItemsWrapper.scss";
 import { useState } from "react";
 
 const MoviesPage = ({ service }) => {
     const [movieList, setMovieList] = useState(service.getMovies);
 
-    const chengeFilter = (movieList) => {
-        setMovieList(movieList);
+    const chengeFilter = (list) => {
+        setMovieList(list);
     };
 
     return (

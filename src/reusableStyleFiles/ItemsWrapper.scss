@@ -1,4 +1,4 @@
-@import "../../Variables.scss";
+@import "../Variables.scss";
 
 .itemsWrapper {
     display: grid;
@@ -33,6 +33,13 @@
                     border-bottom: 1px solid darken($color: $color-gray, $amount: 10%);
                     background-color: lighten($color: $color-gray, $amount: 3%);
                     cursor: pointer;
+                }
+
+                .wrapper-content.active {
+                    color: $color-light;
+                    padding: $gap / 1.2;
+                    border-bottom: 1px solid darken($color: $color-gray, $amount: 10%);
+                    background-color: $color-accent;
                 }
 
                 .wrapper-content:hover {

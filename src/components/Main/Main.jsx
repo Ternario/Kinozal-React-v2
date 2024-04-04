@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-const Main = ({ searchItem, showSerchItem }) => {
+const Main = ({ showSerchItem }) => {
     return (
         <>
-            <Header searchItem={searchItem} showSerchItem={showSerchItem} />
+            <Header showSerchItem={showSerchItem} />
             <Outlet />
             <Footer />
         </>

@@ -1,13 +1,15 @@
 import SideBarFilter from "./SideBarFilter/SideBarFilter";
 import Items from "../../reusableComponents/Items/Items";
-import "./ItemsWrapper.scss";
+import "../../reusableStyleFiles/ItemsWrapper.scss";
 import { useState } from "react";
 
 const SerialsPage = ({ service }) => {
     const [serialsList, setSerialsList] = useState(service.getSerials);
+
     const chengeFilter = (serialsList) => {
         setSerialsList(serialsList);
     };
+
     return (
         <div className="itemsWrapper">
             <SideBarFilter service={service} chengeFilter={chengeFilter} />

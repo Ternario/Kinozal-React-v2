@@ -132,28 +132,28 @@ export default class MoviesData {
         const URL = `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`;
         const res = await this.getResource(URL);
 
-        return res.genres.map(this._transformItemList);
+        return res.results.map(this._transformItem);
     };
 
     getCustomMoviesSearch = async (query) => {
         const URL = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
         const res = await this.getResource(URL);
 
-        return res.genres.map(this._transformItemList);
+        return res.results.map(this._transformItem);
     };
 
     getCustomTvSearch = async (query) => {
         const URL = `https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=1`;
         const res = await this.getResource(URL);
 
-        return res.genres.map(this._transformItemList);
+        return res.results.map(this._transformItem);
     };
 
     getCustomPersonSearch = async (query) => {
         const URL = `https://api.themoviedb.org/3/search/person?query=${query}&include_adult=false&language=en-US&page=1`;
         const res = await this.getResource(URL);
 
-        return res.genres.map(this._transformItemList);
+        return res.results.map(this._transformPerson);
     };
 
     // getItemByName = async (name) => {
@@ -180,7 +180,16 @@ export default class MoviesData {
             title: item.title || item.name,
             id: item.id,
             releaseDate: item.release_date || item.first_air_date,
-            genreId: item.genre_ids,
+            type: item.media_type,
+        };
+    }
+
+    _transformPerson(item) {
+        return {
+            photo: item.profile_path,
+            name: item.name,
+            id: item.id,
+            popularity: item.popularity,
         };
     }
 
